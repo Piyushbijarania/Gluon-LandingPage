@@ -5,7 +5,7 @@ interface NeutronIconProps {
   size?: number
 }
 
-/** Neutron / Stable Token – red coin (from Gluon-EVM-WebUI StableCoinIcon / GaucIcon) */
+/** Neutron / Stable Token – gold coin (from Gluon-EVM-WebUI) */
 export default function NeutronIcon({
   className = '',
   size = 64,
@@ -20,7 +20,7 @@ export default function NeutronIcon({
     >
       <g transform="scale(1)">
         <circle
-          fill="#e4201f"
+          fill="#f59e0b"
           cx="131.14"
           cy="131.14"
           r="131.11"
@@ -28,21 +28,21 @@ export default function NeutronIcon({
         />
         <path
           fill="none"
-          stroke="#fff"
+          stroke="#1a1a1a"
           strokeMiterlimit={10}
           strokeWidth={7}
           d="M131,232c-23.41,0-42.45-45.68-42.45-101.83S107.55,28.3,131,28.3,169.6,53,172.76,96.13a.29.29,0,0,1-.57,0C169.06,53.4,154,28.87,131,28.87S89.08,74.3,89.08,130.14,107.87,231.4,131,231.4c11.65,0,22.15-7.75,29.56-21.83,8.06-15.31,12.32-37.41,12.32-63.91v-.08c0-3.77-3.42-6.85-7.61-6.85H132a.28.28,0,0,1,0-.56h33.24c4.5,0,8.17,3.32,8.17,7.41v.08c0,26.59-4.28,48.78-12.38,64.18C153.51,224.11,142.83,232,131,232Z"
         />
         <path
           fill="none"
-          stroke="#fff"
+          stroke="#1a1a1a"
           strokeMiterlimit={10}
           strokeWidth={7}
           d="M164.19,62.1C181,55.32,226,42.81,224.31,74.94c-.58,11.08-6.19,21.75-12,31-8.35,13.25-18.84,25.16-30.07,36-25.45,24.67-56.42,46.59-90.18,58.15C77.31,205.13,44,213.24,40.17,189.76c-1.78-11,3.66-22.56,8.93-31.8,8.23-14.44,19.26-27.27,31-38.91q5.11-5.05,10.49-9.82"
         />
         <ellipse
           fill="none"
-          stroke="#fff"
+          stroke="#1a1a1a"
           strokeMiterlimit={10}
           strokeWidth={7}
           cx="129.11"

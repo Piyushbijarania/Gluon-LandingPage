@@ -21,8 +21,8 @@ function TokenIcon({ type, size = 44, showLabel = true }: TokenIconProps) {
     type === 'base'
       ? 'shadow-[0_0_12px_rgba(139,92,246,0.4)]'
       : type === 'neutron'
-        ? 'shadow-[0_0_12px_rgba(228,32,31,0.4)]'
-        : 'shadow-[0_0_12px_rgba(251,191,36,0.4)]'
+        ? 'shadow-[0_0_12px_rgba(245,158,11,0.4)]'
+        : 'shadow-[0_0_12px_rgba(228,32,31,0.4)]'
   const rounded = type === 'base' ? 'rounded-xl' : 'rounded-full'
 
   return (

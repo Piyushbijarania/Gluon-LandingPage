@@ -101,7 +101,7 @@ export default function Home() {
       <div 
         ref={howItWorksSectionRef}
         className="relative"
-        style={{ height: `${100 * HOW_IT_WORKS_RAIL_ITEMS.length}vh` }}
+        style={{ height: `${140 * HOW_IT_WORKS_RAIL_ITEMS.length}vh` }}
       >
         <section 
           id="how-it-works" 
@@ -141,7 +141,7 @@ export default function Home() {
                 </h2>
                 <div className="space-y-4 text-gray-400 leading-relaxed">
                   <p className="text-base">
-                    The essence of Gluon W is that, analogously to how an atom&apos;s nucleus is composed of protons and neutrons (known collectively as nucleons), a base token is composed of two sub-assets: <span className="text-amber-300 font-medium">neutrons</span> or stable tokens, whose price is kept stable relative to a target price; and <span className="text-purple-300 font-medium">protons</span> or volatile tokens, whose price is more volatile than the base token.
+                    The essence of Gluon W is that, analogously to how an atom&apos;s nucleus is composed of protons and neutrons (known collectively as nucleons), a <span className="text-violet-400 font-medium">base</span> token is composed of two sub-assets: <span className="text-amber-300 font-medium">neutrons</span> or stable tokens, whose price is kept stable relative to a target price; and <span className="text-red-400 font-medium">protons</span> or volatile tokens, whose price is more volatile than the <span className="text-violet-400 font-medium">base</span> token.
                   </p>
                   <p className="text-base text-gray-500">
                     The protocol defines the rules of an autonomous reactor capable of four reactions:

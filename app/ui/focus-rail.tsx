@@ -57,14 +57,14 @@ function TokenIcon({ type, size = 60 }: TokenIconProps) {
     type === 'base'
       ? 'shadow-[0_0_16px_rgba(139,92,246,0.5)]'
       : type === 'neutron'
-        ? 'shadow-[0_0_16px_rgba(228,32,31,0.5)]'
-        : 'shadow-[0_0_16px_rgba(251,191,36,0.5)]';
+        ? 'shadow-[0_0_16px_rgba(245,158,11,0.5)]'
+        : 'shadow-[0_0_16px_rgba(228,32,31,0.5)]';
   const rounded = type === 'base' ? 'rounded-xl' : 'rounded-full';
 
   return (
-    <div className="flex flex-col items-center gap-2">
+        <div className="flex flex-col items-center gap-2 p-1">
       <div
-        className={`${rounded} flex items-center justify-center overflow-hidden border border-white/20 bg-white/[0.06] ${glow}`}
+        className={`${rounded} flex items-center justify-center overflow-hidden border border-white/15 bg-white/[0.06] shadow-sm ${glow}`}
         style={{ width: size, height: size }}
       >
         <Icon size={Math.round(size * 0.85)} className="shrink-0" />
@@ -88,16 +88,16 @@ function ReactionVisualization({
   const isMerge = inputTokens.length === 2 && outputTokens.length === 1;
 
   return (
-    <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 p-6">
+    <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 pt-8 px-6 pb-6">
       <div className="flex w-full items-center justify-between gap-4">
         {/* Input Tokens */}
         <div className="flex items-center gap-3">
           {inputTokens.length === 1 ? (
             <TokenIcon type={inputTokens[0]} size={70} />
           ) : (
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-3">
               {inputTokens.map((t, i) => (
-                <TokenIcon key={i} type={t} size={60} />
+                <TokenIcon key={i} type={t} size={54} />
               ))}
             </div>
           )}
@@ -133,9 +133,9 @@ function ReactionVisualization({
           {outputTokens.length === 1 ? (
             <TokenIcon type={outputTokens[0]} size={70} />
           ) : (
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-3">
               {outputTokens.map((t, i) => (
-                <TokenIcon key={i} type={t} size={60} />
+                <TokenIcon key={i} type={t} size={54} />
               ))}
             </div>
           )}
@@ -143,6 +143,23 @@ function ReactionVisualization({
       </div>
     </div>
   );
+}
+
+function highlightTokenTerms(text: string) {
+  const parts = text.split(/(\bneutrons?\b|\bprotons?\b|\bbase\b)/gi);
+  return parts.map((part, i) => {
+    const lower = part.toLowerCase();
+    if (lower === 'neutron' || lower === 'neutrons') {
+      return <span key={i} className="text-amber-300 font-medium">{part}</span>;
+    }
+    if (lower === 'proton' || lower === 'protons') {
+      return <span key={i} className="text-red-400 font-medium">{part}</span>;
+    }
+    if (lower === 'base') {
+      return <span key={i} className="text-violet-400 font-medium">{part}</span>;
+    }
+    return part;
+  });
 }
 
 export function FocusRail({
@@ -169,7 +186,7 @@ export function FocusRail({
     offset: ["start start", "end start"],
   });
 
-  // Discrete bands: [0, 0.25) → 0, [0.25, 0.5) → 1, [0.5, 0.75) → 2, [0.75, 1] → 3
+  // Discrete bands: each card gets equal scroll time [0, 0.25) → 0, [0.25, 0.5) → 1, [0.5, 0.75) → 2, [0.75, 1] → 3
   const scrollBasedIndex = useTransform(scrollYProgress, (p) => {
     const clamped = Math.max(0, Math.min(1, p));
     const idx = clamped >= 1 ? count - 1 : Math.floor(clamped * count);
@@ -313,8 +330,8 @@ export function FocusRail({
               <motion.div
                 key={absIndex}
                 className={cn(
-                  "absolute aspect-[3/4] w-[240px] md:w-[280px] rounded-2xl border border-white/15 bg-neutral-900/90 shadow-2xl transition-shadow duration-300 overflow-hidden",
-                  isCenter ? "z-20 shadow-amber-500/10 ring-2 ring-amber-500/30" : "z-10"
+                  "absolute aspect-[3/4] w-[20px] md:w-[280px] rounded-2xl bg-neutral-900/90 shadow-2xl transition-shadow duration-300 overflow-hidden",
+                  isCenter ? "z-20 shadow-amber-500/10 border-2 border-amber-500/40" : "z-10 border border-white/10"
                 )}
                 initial={false}
                 animate={{
@@ -372,17 +389,12 @@ export function FocusRail({
                 transition={{ duration: 0.3 }}
                 className="space-y-2"
               >
-                {activeItem.meta && (
-                  <span className="text-xs font-medium uppercase tracking-wider text-amber-400">
-                    {activeItem.meta}
-                  </span>
-                )}
                 <h2 className="text-2xl font-bold tracking-tight md:text-3xl text-amber-50">
                   {activeItem.title}
                 </h2>
                 {activeItem.description && (
-                  <p className="max-w-md text-neutral-400 text-sm md:text-base">
-                    {activeItem.description}
+                  <p className="max-w-md text-neutral-400 text-sm md:text-base leading-relaxed">
+                    {highlightTokenTerms(activeItem.description)}
                   </p>
                 )}
               </motion.div>
