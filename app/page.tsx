@@ -1,10 +1,13 @@
 'use client'
 
 import { useRef } from 'react'
+import Image from 'next/image'
 import Navbar from './components/Navbar'
 import ScrollExpandMedia from './components/ScrollExpandMedia'
 import { FocusRail, type FocusRailItem } from './ui/focus-rail'
 import { motion } from 'framer-motion'
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ""
 
 const HOW_IT_WORKS_RAIL_ITEMS: FocusRailItem[] = [
   {
@@ -170,39 +173,10 @@ export default function Home() {
         </section>
       </div>
 
-      {/* Dynamic Fees Info Card - below sticky zone */}
-      <section className="relative px-6 py-24 sm:px-8 lg:px-16 border-t border-white/5">
-        <div className="relative mx-auto max-w-4xl">
-          <motion.div 
-            className="relative"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="relative p-8 bg-white/[0.03] border border-white/10 rounded-2xl backdrop-blur-sm hover:border-amber-500/30 transition-all duration-500">
-              <div className="flex flex-col md:flex-row items-start gap-6">
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center flex-shrink-0 shadow-lg">
-                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </div>
-                <div className="flex-1">
-                  <h4 className="text-xl font-bold text-amber-300 mb-2">Dynamic Fee System</h4>
-                  <p className="text-gray-400 leading-relaxed">
-                    Beta decay reactions feature variable fees based on recent transaction volume, protecting the protocol from oracle manipulation while keeping costs low during normal usage. This adaptive mechanism ensures both security and efficiency.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
       {/* Whitepaper Section */}
       <ScrollExpandMedia
         mediaType="image"
-        mediaSrc="/whitepaper1.png"
+        mediaSrc={`${basePath}/whitepaper1.png`}
         title="GLUON W"
         date="Cryptocurrency Stabilization Protocol"
         scrollToExpand="Scroll to Explore"
@@ -331,9 +305,11 @@ export default function Home() {
       <footer className="px-6 py-16 sm:px-8 lg:px-16 border-t border-white/5">
         <div className="mx-auto max-w-6xl">
           <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-            <img 
-              src="/logo-animated.gif" 
+            <Image 
+              src={`${basePath}/logo-animated.gif`}
               alt="Stability Nexus" 
+              width={120}
+              height={48}
               className="h-12 w-auto"
             />
             

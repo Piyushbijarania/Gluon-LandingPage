@@ -31,7 +31,13 @@ export const metadata: Metadata = {
   },
   robots: "index, follow",
   icons: {
-    icon: "/image.png",
+    icon: [
+      {
+        url: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/image.png`,
+        type: "image/png",
+        sizes: "32x32",
+      },
+    ],
   },
 };
 

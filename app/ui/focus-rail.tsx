@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import { motion, AnimatePresence, PanInfo, useScroll, useTransform } from "framer-motion";
 import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
@@ -8,6 +9,8 @@ import { cn } from "@/lib/utils";
 import BaseTokenIcon from "../components/icons/BaseTokenIcon";
 import NeutronIcon from "../components/icons/NeutronIcon";
 import ProtonIcon from "../components/icons/ProtonIcon";
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 export type FocusRailItem = {
   id: string | number;
@@ -354,9 +357,11 @@ export function FocusRail({
                     outputTokens={item.outputTokens}
                   />
                 ) : item.imageSrc ? (
-                  <img
-                    src={item.imageSrc}
+                  <Image
+                    src={item.imageSrc.startsWith("/") ? `${basePath}${item.imageSrc}` : item.imageSrc}
                     alt={item.title}
+                    width={280}
+                    height={373}
                     className="h-full w-full object-cover pointer-events-none"
                   />
                 ) : (

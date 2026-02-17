@@ -1,7 +1,11 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import Image from 'next/image'
+import Link from 'next/link'
+import { motion } from 'framer-motion'
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ""
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -9,27 +13,16 @@ export default function Navbar() {
   const [windowWidth, setWindowWidth] = useState(0)
 
   useEffect(() => {
-    // Delay animation enablement to avoid flicker
     const timer = setTimeout(() => setHasAnimated(true), 100)
-    
-    // Check initial scroll position
-    const currentScrollY = window.scrollY
-    setIsScrolled(currentScrollY > 50)
-    
-    // Set initial window width
-    setWindowWidth(window.innerWidth)
 
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY
-      setIsScrolled(currentScrollY > 50)
-    }
-    
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth)
-    }
+    const handleScroll = () => setIsScrolled(window.scrollY > 50)
+    const handleResize = () => setWindowWidth(window.innerWidth)
+
+    handleScroll()
+    handleResize()
 
     window.addEventListener('scroll', handleScroll, { passive: true })
-    window.addEventListener('resize', handleResize, { passive: true })
+    window.addEventListener('resize', handleResize)
     return () => {
       window.removeEventListener('scroll', handleScroll)
       window.removeEventListener('resize', handleResize)
@@ -117,10 +110,10 @@ export default function Navbar() {
           }}
         >
           <div className="flex items-center flex-shrink-0">
-            <a href="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
-              <img src="/image.png" alt="Gluon" className="h-8" />
+            <Link href="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
+              <Image src={`${basePath}/image.png`} alt="Gluon" width={32} height={32} className="h-8 w-auto" />
               <span className="text-xl font-semibold text-amber-400">Gluon</span>
-            </a>
+            </Link>
           </div>
 
           {/* Right side buttons */}

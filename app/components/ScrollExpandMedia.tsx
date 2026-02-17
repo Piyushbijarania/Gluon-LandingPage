@@ -64,8 +64,6 @@ const ScrollExpandMedia = ({
   const scale = useTransform(scrollYProgress, [0, 0.2, 0.6, 1], [1, 1, 1, 1]);
   const titleOpacity = useTransform(scrollYProgress, [0, 0.3, 1], [0, 0, 0]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.5, 0.7, 1], [1, 1, 1, 0]);
-  const backdropBlur = useTransform(scrollYProgress, [0, 0.3, 0.5], [40, 40, 40]);
-
   const firstWord = title ? title.split(' ')[0] : '';
   const restOfTitle = title ? title.split(' ').slice(1).join(' ') : '';
 
