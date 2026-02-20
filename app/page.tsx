@@ -9,6 +9,9 @@ import { motion } from 'framer-motion'
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ""
 
+const HERO_LINK_CLASS =
+  "px-8 py-3 text-lg font-semibold text-amber-100 bg-white/[0.02] border border-white/10 rounded-full hover:border-amber-500/50 hover:bg-white/[0.05] hover:text-amber-400 hover:scale-105 hover:shadow-lg hover:shadow-amber-500/20 transition-all duration-300"
+
 const HOW_IT_WORKS_RAIL_ITEMS: FocusRailItem[] = [
   {
     id: 'fission',
@@ -73,7 +76,7 @@ export default function Home() {
                 href="https://evm.gluon.stability.nexus/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-3 text-lg font-semibold text-amber-100 bg-white/[0.02] border border-white/10 rounded-full hover:border-amber-500/50 hover:bg-white/[0.05] hover:text-amber-400 hover:scale-105 hover:shadow-lg hover:shadow-amber-500/20 transition-all duration-300"
+                className={HERO_LINK_CLASS}
               >
                 EVM
               </a>
@@ -82,7 +85,7 @@ export default function Home() {
                 href="https://gluon.gold/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-3 text-lg font-semibold text-amber-100 bg-white/[0.02] border border-white/10 rounded-full hover:border-amber-500/50 hover:bg-white/[0.05] hover:text-amber-400 hover:scale-105 hover:shadow-lg hover:shadow-amber-500/20 transition-all duration-300"
+                className={HERO_LINK_CLASS}
               >
                 Ergo
               </a>
@@ -91,7 +94,7 @@ export default function Home() {
                 href="https://solana.gluon.stability.nexus/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-3 text-lg font-semibold text-amber-100 bg-white/[0.02] border border-white/10 rounded-full hover:border-amber-500/50 hover:bg-white/[0.05] hover:text-amber-400 hover:scale-105 hover:shadow-lg hover:shadow-amber-500/20 transition-all duration-300"
+                className={HERO_LINK_CLASS}
               >
                 Solana
               </a>

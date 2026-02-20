@@ -1,11 +1,7 @@
 'use client';
 
-import {
-  useEffect,
-  useRef,
-  useState,
-  ReactNode,
-} from 'react';
+import { useEffect, useRef, useState } from 'react';
+import type { ReactNode } from 'react';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
@@ -145,7 +141,7 @@ const ScrollExpandMedia = ({
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
               >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                 </svg>
                 {scrollToExpand}

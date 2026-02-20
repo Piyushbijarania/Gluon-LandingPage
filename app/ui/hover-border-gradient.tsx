@@ -5,6 +5,18 @@ import { cn } from "@/lib/utils";
 
 type Direction = "TOP" | "LEFT" | "BOTTOM" | "RIGHT";
 
+const MOVING_MAP: Record<Direction, string> = {
+  TOP: "radial-gradient(40% 80% at 50% 0%, hsl(0, 0%, 100%) 0%, rgba(255, 255, 255, 0) 100%)",
+  LEFT: "radial-gradient(35% 70% at 0% 50%, hsl(0, 0%, 100%) 0%, rgba(255, 255, 255, 0) 100%)",
+  BOTTOM:
+    "radial-gradient(40% 80% at 50% 100%, hsl(0, 0%, 100%) 0%, rgba(255, 255, 255, 0) 100%)",
+  RIGHT:
+    "radial-gradient(35% 70% at 100% 50%, hsl(0, 0%, 100%) 0%, rgba(255, 255, 255, 0) 100%)",
+};
+
+const HIGHLIGHT_GRADIENT =
+  "radial-gradient(100% 200% at 50% 50%, #fbbf24 0%, rgba(251, 191, 36, 0) 100%)";
+
 export function HoverBorderGradient({
   children,
   containerClassName,
@@ -33,18 +45,6 @@ export function HoverBorderGradient({
       : (currentIndex + 1) % directions.length;
     return directions[nextIndex];
   }, [clockwise]);
-
-  const movingMap: Record<Direction, string> = {
-    TOP: "radial-gradient(40% 80% at 50% 0%, hsl(0, 0%, 100%) 0%, rgba(255, 255, 255, 0) 100%)",
-    LEFT: "radial-gradient(35% 70% at 0% 50%, hsl(0, 0%, 100%) 0%, rgba(255, 255, 255, 0) 100%)",
-    BOTTOM:
-      "radial-gradient(40% 80% at 50% 100%, hsl(0, 0%, 100%) 0%, rgba(255, 255, 255, 0) 100%)",
-    RIGHT:
-      "radial-gradient(35% 70% at 100% 50%, hsl(0, 0%, 100%) 0%, rgba(255, 255, 255, 0) 100%)",
-  };
-
-  const highlight =
-    "radial-gradient(100% 200% at 50% 50%, #fbbf24 0%, rgba(251, 191, 36, 0) 100%)";
 
   useEffect(() => {
     if (!hovered) {
@@ -83,11 +83,11 @@ export function HoverBorderGradient({
           width: "100%",
           height: "100%",
         }}
-        initial={{ background: movingMap[direction] }}
+        initial={{ background: MOVING_MAP[direction] }}
         animate={{
           background: hovered
-            ? [movingMap[direction], highlight]
-            : movingMap[direction],
+            ? [MOVING_MAP[direction], HIGHLIGHT_GRADIENT]
+            : MOVING_MAP[direction],
         }}
         transition={{ ease: "linear", duration: 0.3 }}
       />

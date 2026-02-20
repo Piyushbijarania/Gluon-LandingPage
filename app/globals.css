@@ -35,10 +35,8 @@ html {
   }
 }
 
-@layer utilities {
-  .bg-gradient-radial {
-    background-image: radial-gradient(circle, var(--tw-gradient-stops));
-  }
+@utility bg-gradient-radial {
+  background-image: radial-gradient(circle, var(--tw-gradient-stops));
 }
 
 /* Premium flow glow – smooth continuous slide */
