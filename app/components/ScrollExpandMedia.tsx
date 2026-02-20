@@ -102,10 +102,11 @@ const ScrollExpandMedia = ({
             <div className='absolute inset-0 shadow-[0_0_100px_rgba(251,191,36,0.3)]' />
           </motion.div>
 
-          {/* Title Animation */}
+          {/* Title Animation - only when title is provided */}
           <motion.div
             className='absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-20'
           >
+            {title ? (
             <div className={`flex flex-col items-center gap-3 ${textBlend ? 'mix-blend-difference' : ''}`}>
               <motion.h2 
                 className='text-5xl md:text-6xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-100 to-yellow-200 text-center px-4'
@@ -124,6 +125,7 @@ const ScrollExpandMedia = ({
                 {restOfTitle}
               </motion.h2>
             </div>
+            ) : null}
             {date && (
               <motion.p 
                 className='text-lg md:text-xl text-amber-300/80 mt-8 text-center px-4 font-medium'
@@ -136,7 +138,7 @@ const ScrollExpandMedia = ({
             )}
             {scrollToExpand && (
               <motion.p 
-                className='text-sm text-amber-400/60 mt-10 animate-bounce flex items-center gap-2'
+                className='text-sm text-amber-400/60 mt-10 animate-bounce scroll-hint flex items-center gap-2'
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}

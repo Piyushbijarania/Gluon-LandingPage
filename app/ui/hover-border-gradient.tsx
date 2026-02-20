@@ -1,5 +1,6 @@
 "use client";
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
+import type * as React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -57,8 +58,8 @@ export function HoverBorderGradient({
 
   return (
     <Tag
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onPointerEnter={() => setHovered(true)}
+      onPointerLeave={() => setHovered(false)}
       className={cn(
         "relative flex rounded-full border content-center bg-black/20 hover:bg-black/10 transition duration-500 dark:bg-white/20 items-center flex-col flex-nowrap gap-10 h-min justify-center overflow-visible p-px decoration-clone w-fit",
         containerClassName
@@ -91,7 +92,7 @@ export function HoverBorderGradient({
         }}
         transition={{ ease: "linear", duration: 0.3 }}
       />
-      <div className="bg-black absolute z-[1] flex-none inset-[2px] rounded-[100px]" />
+      <div className="bg-black absolute z-[1] flex-none inset-[2px] rounded-[inherit]" />
     </Tag>
   );
 }

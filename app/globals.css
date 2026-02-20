@@ -33,6 +33,9 @@ html {
   .animate-flow-glow {
     animation: none !important;
   }
+  .scroll-hint {
+    animation: none !important;
+  }
 }
 
 @utility bg-gradient-radial {
