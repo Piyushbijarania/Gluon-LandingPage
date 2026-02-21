@@ -12,6 +12,9 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ""
 const HERO_LINK_CLASS =
   "px-8 py-3 text-lg font-semibold text-amber-100 bg-white/[0.02] border border-white/10 rounded-full hover:border-amber-500/50 hover:bg-white/[0.05] hover:text-amber-400 hover:scale-105 hover:shadow-lg hover:shadow-amber-500/20 transition-all duration-300"
 
+const FOOTER_SOCIAL_LINK_CLASS =
+  "w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all"
+
 const HOW_IT_WORKS_RAIL_ITEMS: FocusRailItem[] = [
   {
     id: 'fission',
@@ -322,7 +325,7 @@ export default function Home() {
                 href="https://github.com/StabilityNexus" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all"
+                className={FOOTER_SOCIAL_LINK_CLASS}
                 aria-label="GitHub"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -333,7 +336,7 @@ export default function Home() {
                 href="https://x.com/StabilityNexus" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all"
+                className={FOOTER_SOCIAL_LINK_CLASS}
                 aria-label="X (Twitter)"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -344,7 +347,7 @@ export default function Home() {
                 href="https://discord.com/invite/YzDKeEfWtS" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all"
+                className={FOOTER_SOCIAL_LINK_CLASS}
                 aria-label="Discord"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -355,7 +358,7 @@ export default function Home() {
                 href="https://t.me/StabilityNexus" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all"
+                className={FOOTER_SOCIAL_LINK_CLASS}
                 aria-label="Telegram"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -366,7 +369,7 @@ export default function Home() {
                 href="https://linkedin.com/company/stability-nexus" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all"
+                className={FOOTER_SOCIAL_LINK_CLASS}
                 aria-label="LinkedIn"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
