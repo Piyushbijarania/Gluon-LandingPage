@@ -64,7 +64,7 @@ export default function Home() {
         {/* Hero Section */}
       <section className="relative overflow-hidden px-6 pt-32 pb-48 sm:px-8 lg:px-16 min-h-screen flex items-center bg-background">
         <div className="relative mx-auto max-w-4xl text-center w-full z-10">
-          <h1 className="text-5xl font-bold sm:text-6xl lg:text-7xl mt-29 tracking-tight text-gluon">
+          <h1 className="text-5xl font-bold sm:text-6xl lg:text-7xl mt-[7.25rem] tracking-tight text-gluon">
             Gluon Stablecoin Protocol
           </h1>
           
@@ -322,7 +322,7 @@ export default function Home() {
             />
             
             <p className="text-white/60 text-sm text-center">
-              © 2026 Stability Nexus. All rights reserved.
+              © {new Date().getFullYear()} Stability Nexus. All rights reserved.
             </p>
             
             <div className="flex gap-4">
