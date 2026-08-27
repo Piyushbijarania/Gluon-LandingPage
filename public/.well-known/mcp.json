@@ -1,0 +1,16 @@
+{
+  "schema_version": "v1",
+  "name": "Gluon Protocol MCP Server",
+  "description": "Model Context Protocol endpoint for discovering Gluon Protocol metadata, paper references, and dual asset specifications across EVM, Ergo, and Solana.",
+  "vendor": "Stability Nexus",
+  "homepage": "https://gluon.stability.nexus",
+  "transport": {
+    "type": "sse",
+    "url": "https://gluon.stability.nexus/api/mcp"
+  },
+  "capabilities": {
+    "resources": true,
+    "tools": true,
+    "prompts": true
+  }
+}

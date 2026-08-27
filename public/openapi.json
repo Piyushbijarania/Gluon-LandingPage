@@ -1,0 +1,47 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Gluon Protocol API",
+    "version": "1.0.0",
+    "description": "API specification for fetching Gluon Protocol metadata, architectural features, ecosystem instances, and repository information."
+  },
+  "servers": [
+    {
+      "url": "https://gluon.stability.nexus",
+      "description": "Environment server"
+    }
+  ],
+  "paths": {
+    "/api/info": {
+      "get": {
+        "summary": "Get Gluon Protocol information",
+        "description": "Returns metadata, core architectural principles, features, live ecosystem instances (EVM, Ergo, Solana), and repository links for Gluon Protocol.",
+        "operationId": "getProtocolInfo",
+        "responses": {
+          "200": {
+            "description": "Successful response containing protocol details and ecosystem instance links",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": { "type": "string" },
+                    "version": { "type": "string" },
+                    "description": { "type": "string" },
+                    "architecture": { "type": "string" },
+                    "features": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    },
+                    "instances": { "type": "object" },
+                    "links": { "type": "object" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
