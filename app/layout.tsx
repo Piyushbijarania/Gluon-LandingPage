@@ -46,8 +46,40 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://gluon.stability.nexus/#website",
+        "url": "https://gluon.stability.nexus/",
+        "name": "Gluon Protocol",
+        "description": "Physics-inspired dual-token stablecoin protocol with zero governance and no rent-seeking fees."
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://gluon.stability.nexus/#application",
+        "name": "Gluon Protocol",
+        "applicationCategory": "DeFiApplication",
+        "operatingSystem": "Web",
+        "url": "https://gluon.stability.nexus/",
+        "author": {
+          "@type": "Organization",
+          "name": "Stability Nexus",
+          "url": "https://stability.nexus"
+        }
+      }
+    ]
+  };
+
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

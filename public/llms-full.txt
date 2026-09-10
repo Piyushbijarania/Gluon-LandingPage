@@ -1,0 +1,110 @@
+# Gluon W Stablecoin Protocol — Full Technical Reference
+
+Official academic specification and mathematical design principles of the Gluon W protocol.
+
+---
+
+## 1. Overview & Terminology
+**Gluon W** is a physics-inspired, zero-governance, rent-seeking free stablecoin protocol designed by **Joachim Zahnentferner** (also known as **Dr. Bruno Woltzenlogel Paleo**) and researched by **The Stable Order** & **Stability Nexus**. 
+
+Rather than utilizing traditional collateralized debt positions (CDPs) or rigid seigniorage mechanics, Gluon W splits a single base asset (e.g. ERG, ETH, SOL) into stable and volatile sub-assets:
+
+*   **Base Token (denoted by ☯ or Base Asset)**: The volatile reserve asset held by the smart contract reactor.
+*   **Stable Tokeons or Neutrons (denoted by $\circ$)**: Sub-tokens whose value is maintained stable relative to a target price (e.g., 1 GAU pegged to 1 gram of gold or 1 USD).
+*   **Volatile Tokeons or Protons (denoted by $\bullet$)**: Sub-tokens that absorb reserve fluctuations, providing leveraged exposure to the underlying reserve asset.
+*   **Tokeons / Nucleons**: The sub-assets (neutrons and protons) collectively.
+
+---
+
+## 2. Core Parameters & State Variables
+
+### Constant Parameters (Set at Deployment)
+*   $q^*$: Upper bound for the fusion ratio. Constraint: $0 < q^* < 1$.
+*   $\Phi_\downarrow$: Intuitively denotes the intrinsic cost (fee) for a fission. Constraint: $0 < \Phi_\downarrow < 1$.
+*   $\Phi_\uparrow$: Intuitively denotes the intrinsic cost (fee) for a fusion. Constraint: $0 < \Phi_\uparrow < 1$.
+*   $\Phi^0_\beta$, $\Phi^1_\beta$: y-intercept and slope of the linear function used to determine the cost of beta decays. Constraints: $0 < \Phi^x_\beta \le 1$.
+*   $T$: Rolling window time frame for tracking beta decay volume. In production instances, this is set to a **14-day rolling window** ($T = 14\text{ days}$).
+
+### Reactor State Variables
+*   $R$: The number of base tokens currently fissioned (held in the protocol reserve).
+*   $S_\circ$: The number of neutrons (stable coins) in circulation.
+*   $S_\bullet$: The number of protons (volatile coins) in circulation.
+
+---
+
+## 3. Mathematical Equations & Pricing
+
+### 1. Fusion Ratio ($q$)
+Determines what fraction of the reserve is backing neutrons, based on the target price of neutrons $P_\circ^*$ given by an external oracle:
+$$q(R, S_\circ) = \min\left(q^*, \frac{S_\circ P_\circ^*}{R}\right)$$
+
+### 2. Neutron Price ($P_\circ$)
+The amount of reserve asset backing each stable token:
+$$P_\circ(R, S_\circ) = \frac{q(R, S_\circ) R}{S_\circ}$$
+
+### 3. Proton Price ($P_\bullet$)
+The amount of reserve asset backing each volatile token:
+$$P_\bullet(R, S_\circ, S_\bullet) = \frac{(1 - q(R, S_\circ)) R}{S_\bullet}$$
+
+### 4. Liabilities ($L$) & Equity ($E$)
+*   **Liabilities**: $L(R, S_\circ) = S_\circ P_\circ(R, S_\circ) = q(R, S_\circ) R$
+*   **Equity**: $E(R, S_\circ) = R - L(R, S_\circ) = (1 - q(R, S_\circ)) R$
+*   **Reserve Ratio ($r$)**: $r(R, S_\circ) = \frac{R}{L(R, S_\circ)} = \frac{1}{q(R, S_\circ)}$
+
+---
+
+## 4. Reaction Operations (Inputs & Outputs)
+
+### 1. Fission (Base Asset $\to$ Neutrons + Protons)
+A user deposits $m$ base tokens into the reactor.
+*   **Input**: $m$ base tokens.
+*   **Output**: 
+    *   **Protons ($\bullet$)**: $\frac{m (1 - q(R, S_\circ))(1 - \Phi_\downarrow)}{P_\bullet}$
+    *   **Neutrons ($\circ$)**: $\frac{m q(R, S_\circ)(1 - \Phi_\downarrow)}{P_\circ}$
+
+### 2. Fusion (Neutrons + Protons $\to$ Base Asset)
+A user merges neutrons and protons back into the base asset.
+*   **Input**: 
+    *   **Protons ($\bullet$)**: $\frac{m (1 - q(R, S_\circ))}{P_\bullet}$
+    *   **Neutrons ($\circ$)**: $\frac{m q(R, S_\circ)}{P_\circ}$
+*   **Output**: $m (1 - \Phi_\uparrow)$ base tokens.
+
+### 3. Beta Decay Plus ($\beta^+$) (Protons $\to$ Neutrons)
+A user swaps volatile tokens for stable tokens.
+*   **Input**: $\frac{m}{P_\bullet}$ protons.
+*   **Output**: $\frac{m (1 - \varphi_{\beta^+}(\tau))}{P_\circ}$ neutrons.
+*   **Fee**: $\varphi_{\beta^+}(\tau) = \min\left(1, \Phi^0_\beta + \Phi^1_\beta \frac{\max\{\Delta(\tau), 0\}}{R}\right)$
+
+### 4. Beta Decay Minus ($\beta^-$) (Neutrons $\to$ Protons)
+A user swaps stable tokens for volatile tokens.
+*   **Input**: $\frac{m}{P_\circ}$ neutrons.
+*   **Output**: $\frac{m (1 - \varphi_{\beta^-}(\tau))}{P_\bullet}$ protons.
+*   **Fee**: $\varphi_{\beta^-}(\tau) = \min\left(1, \Phi^0_\beta + \Phi^1_\beta \frac{\max\{-\Delta(\tau), 0\}}{R}\right)$
+
+### Beta Decay Volume Balance ($\Delta(\tau)$)
+The net balance of transmutations inside the rolling time window $T$:
+$$\Delta(\tau) = \sum_{r \in \chi_+(\tau)} \nu(r) - \sum_{r \in \chi_-(\tau)} \nu(r)$$
+where $\chi_+(\tau)$ and $\chi_-(\tau)$ represent the sets of $\beta^+$ and $\beta^-$ decays between times $(\tau - T)$ and $\tau$, and $\nu(r)$ is the volume in base tokens of reaction $r$.
+
+---
+
+## 5. Stability & Economic Guarantees (Formally Verified)
+The stability theorems of Gluon W have been formally verified using the **Rocq** interactive proof assistant (formerly Coq).
+
+*   **Theorem 1 (Peg Maintenance - Upper Bound)**: Rational users will choose the primary market (minting via fission + $\beta^+$) rather than buying neutrons on a secondary market above the effective fee threshold $\Phi(\tau) \approx \frac{r}{(1-\Phi_\downarrow)(1+(r-1)(1-\Phi^0_\beta))} - 1$.
+*   **Theorem 2 (Peg Maintenance - Lower Bound)**: Rational users will choose the primary market (redeeming via partial $\beta^-$ + fusion) rather than selling neutrons on a secondary market below the effective discount threshold $\Phi(\tau) = 1 - \frac{(1-\Phi_\uparrow)(1-\Phi^0_\beta)}{1-q\Phi^0_\beta}$.
+*   **Theorem 3 (Peg Robustness during Market Crashes)**: Assuming the reserve ratio $r > 1/q^*$, the protocol reactor can tolerate a base token price crash of up to $\frac{r - 1/q^*}{r}$ while maintaining the stablecoin peg $P^*_\circ$.
+*   **Theorem 4 (No Insolvency)**: The equity of the protocol is guaranteed to be non-negative ($E(R, S_\circ) \ge 0$) under all states and exchange rates.
+*   **Theorem 5 (Monotonically Increasing Equity per Volatile Token)**: Every fission, fusion, and beta decay operation increases the equity per volatile token (proton price $P_\bullet$) because accrued fees remain within the reserves.
+
+---
+
+## 6. Official Resources & Implementations
+*   **Main Landing Page**: https://gluon.stability.nexus/
+*   **Gluon Gold (Ergo Instance)**: https://gluon.gold/
+*   **Gluon EVM Instance**: https://evm.gluon.stability.nexus/
+*   **Gluon Solana Instance**: https://solana.gluon.stability.nexus/
+*   **Ecosystem Organization**: https://stability.nexus
+*   **GitHub Repository**: https://github.com/StabilityNexus/Gluon-LandingPage
+*   **Documentation**: https://docs.djed.one
+*   **Academic Paper**: https://eprint.iacr.org/2025/1372

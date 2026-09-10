@@ -1,0 +1,28 @@
+# Gluon Protocol
+
+> Gluon is a physics-inspired, zero-governance, rent-seeking free stablecoin protocol designed by Joachim Zahnentferner (Bruno Woltzenlogel Paleo) and developed by The Stable Order & Stability Nexus.
+
+## Official Sites & Ecosystem Instances
+- [Landing Page](https://gluon.stability.nexus/): Main Gluon Protocol landing page
+- [Gluon Gold (Ergo)](https://gluon.gold/): Live Gluon Gold instance on Ergo
+- [Gluon EVM](https://evm.gluon.stability.nexus/): Live Gluon instance on EVM chains
+- [Gluon Solana](https://solana.gluon.stability.nexus/): Live Gluon instance on Solana
+- [Academic Paper](https://eprint.iacr.org/2025/1372): Official Cryptology ePrint paper (IACR 2025/1372)
+- [Documentation](https://docs.djed.one): Protocol specification & Djed Alliance documentation
+- [Stability Nexus](https://stability.nexus): Parent organization & ecosystem articles
+- [OpenAPI Spec](https://gluon.stability.nexus/openapi.json): Machine-readable API specification
+- [AI Plugin Manifest](https://gluon.stability.nexus/.well-known/ai-plugin.json): Plugin manifest format
+- [Full LLM Docs](https://gluon.stability.nexus/llms-full.txt): Comprehensive technical specifications
+
+## Architecture Summary
+Gluon behaves as the mathematical dual of a liquidity pool. Holding a single base asset (e.g. ERG or ETH) in reserve, it issues two tokens outside the reserve:
+- **Stable Coins** (e.g., GAU): Tokens pegged to a target asset (such as gold or USD).
+- **Volatile Coins** (e.g., GAUC): Tokens absorbing reserve volatility and providing leveraged exposure.
+
+## Key Principles
+- **Fission & Fusion**: Fission splits base reserve assets into stable coins and volatile coins. Fusion reversibly combines stable coins and volatile coins back into base reserve assets.
+- **Zero-Governance & Autonomy**: Runs completely autonomously on-chain without central admin keys, multi-sigs, or DAO parameter voting.
+- **Rent-Seeking Free**: Pure public infrastructure with no protocol tax extraction. All transaction fees remain inside the reserve.
+- **Resilience to Oracle Imperfections**: Dynamically adjusts costs based on 14-day trailing transaction volumes to protect reserves.
+- **No Liquidations or Debt**: Zero collateral borrowing, zero forced liquidations, and zero interest rates.
+- **Freedom from Hard Cutoffs**: All core operations remain continuously accessible without rigid minimum/maximum reserve ratio lockouts.
