@@ -23,12 +23,12 @@
     "solana": "https://solana.gluon.stability.nexus/"
   },
   "links": {
-    "website": "https://gluon.stability.nexus/",
+    "website": "https://piyushbijarania.github.io/Gluon-LandingPage/",
     "academicPaper": "https://eprint.iacr.org/2025/1372",
     "organization": "https://stability.nexus",
     "repository": "https://github.com/StabilityNexus/Gluon-LandingPage",
     "documentation": "https://docs.djed.one",
-    "llmsTxt": "https://gluon.stability.nexus/llms.txt",
-    "openApi": "https://gluon.stability.nexus/openapi.json"
+    "llmsTxt": "https://piyushbijarania.github.io/Gluon-LandingPage/llms.txt",
+    "openApi": "https://piyushbijarania.github.io/Gluon-LandingPage/openapi.json"
   }
 }

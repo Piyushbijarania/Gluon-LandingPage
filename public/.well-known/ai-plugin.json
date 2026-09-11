@@ -9,9 +9,9 @@
   },
   "api": {
     "type": "openapi",
-    "url": "https://gluon.stability.nexus/openapi.json"
+    "url": "https://piyushbijarania.github.io/Gluon-LandingPage/openapi.json"
   },
-  "logo_url": "https://gluon.stability.nexus/image.png",
+  "logo_url": "https://piyushbijarania.github.io/Gluon-LandingPage/image.png",
   "contact_email": "contact@stability.nexus",
-  "legal_info_url": "https://gluon.stability.nexus"
+  "legal_info_url": "https://piyushbijarania.github.io/Gluon-LandingPage"
 }
