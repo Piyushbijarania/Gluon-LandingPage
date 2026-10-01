@@ -10,6 +10,7 @@ interface ScrollExpandMediaProps {
   mediaSrc: string;
   posterSrc?: string;
   title?: string;
+  alt?: string;
   date?: string;
   scrollToExpand?: string;
   textBlend?: boolean;
@@ -21,6 +22,7 @@ const ScrollExpandMedia = ({
   mediaSrc,
   posterSrc,
   title,
+  alt,
   date,
   scrollToExpand,
   textBlend,
@@ -79,7 +81,7 @@ const ScrollExpandMedia = ({
             {mediaType === 'image' ? (
               <Image
                 src={mediaSrc}
-                alt={title || 'Media content'}
+                alt={alt || title || 'Gluon Research Whitepaper'}
                 fill
                 className='object-cover'
                 priority

@@ -156,7 +156,7 @@ export default function Home() {
                 </h2>
                 <div className="space-y-4 text-white/90 leading-relaxed">
                   <p className="text-base">
-                    The essence of Gluon W is that, analogously to how an atom's nucleus is composed of protons and neutrons (known collectively as nucleons), a <span className="text-violet-400 font-medium">base</span> token is composed of two sub-assets: <span className="font-medium text-[#f59e0b]">neutrons</span> or stable tokens, whose price is kept stable relative to a target price; and <span className="font-medium text-[#E42423]">protons</span> or volatile tokens, whose price is more volatile than the <span className="text-violet-400 font-medium">base</span> token.
+                    The essence of Gluon W is that, analogously to how an atom&apos;s nucleus is composed of protons and neutrons (known collectively as nucleons), a <span className="text-violet-400 font-medium">base</span> token is composed of two sub-assets: <span className="font-medium text-[#f59e0b]">neutrons</span> or stable tokens, whose price is kept stable relative to a target price; and <span className="font-medium text-[#E42423]">protons</span> or volatile tokens, whose price is more volatile than the <span className="text-violet-400 font-medium">base</span> token.
                   </p>
                   <p className="text-base text-white/70">
                     The protocol defines the rules of an autonomous reactor capable of four reactions:
@@ -189,6 +189,7 @@ export default function Home() {
       <ScrollExpandMedia
         mediaType="image"
         mediaSrc={`${basePath}/whitepaper1.png`}
+        alt="Gluon Research Whitepaper - Dual-Token Stabilization Mechanics (IACR ePrint 2025/1372)"
       >
         <div className="space-y-8">
           <div className="text-center space-y-2">
