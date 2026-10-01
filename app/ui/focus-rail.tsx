@@ -183,9 +183,17 @@ export function FocusRail({
 }: FocusRailProps) {
   const [active, setActive] = React.useState(initialIndex);
   const [isHovering, setIsHovering] = React.useState(false);
+  const [windowWidth, setWindowWidth] = React.useState<number>(1024);
   const accumulatedDelta = React.useRef<number>(0);
   const lastStepTime = React.useRef<number>(0);
   const railRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const count = items.length;
   
@@ -285,7 +293,7 @@ export function FocusRail({
     <div
       ref={railRef}
       className={cn(
-        "group relative flex h-[560px] w-full flex-col overflow-hidden text-white outline-none select-none overflow-x-hidden rounded-2xl glass-card-strong",
+        "group relative flex h-[500px] sm:h-[530px] lg:h-[560px] w-full flex-col overflow-hidden text-white outline-none select-none overflow-x-hidden rounded-2xl glass-card-strong",
         className
       )}
       onMouseEnter={() => setIsHovering(true)}
@@ -312,7 +320,7 @@ export function FocusRail({
 
       <div className="relative z-10 flex flex-1 flex-col justify-center px-4 md:px-8">
         <motion.div
-          className="relative mx-auto flex h-[320px] w-full max-w-5xl items-center justify-center perspective-[1200px] cursor-grab active:cursor-grabbing"
+          className="relative mx-auto flex h-[260px] sm:h-[290px] md:h-[320px] w-full max-w-5xl items-center justify-center perspective-[1200px] cursor-grab active:cursor-grabbing"
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
           dragElastic={0.2}
@@ -327,8 +335,9 @@ export function FocusRail({
 
             const isCenter = offset === 0;
             const dist = Math.abs(offset);
-            const xOffset = offset * 300;
-            const zOffset = -dist * 160;
+            const offsetMultiplier = windowWidth < 640 ? 170 : windowWidth < 1024 ? 230 : 300;
+            const xOffset = offset * offsetMultiplier;
+            const zOffset = -dist * (windowWidth < 640 ? 110 : 160);
             const scale = isCenter ? 1 : 0.82;
             const rotateY = offset * -18;
             const opacity = isCenter ? 1 : Math.max(0.08, 1 - dist * 0.5);
@@ -339,7 +348,7 @@ export function FocusRail({
               <motion.div
                 key={absIndex}
                 className={cn(
-                  "absolute aspect-[3/4] w-[200px] md:w-[280px] rounded-2xl overflow-hidden shadow-2xl transition-shadow duration-300 backdrop-blur-xl bg-white/[0.06] border-[0.25px] border-[rgba(252,204,24,0.2)]",
+                  "absolute aspect-[3/4] w-[180px] sm:w-[220px] md:w-[280px] rounded-2xl overflow-hidden shadow-2xl transition-shadow duration-300 backdrop-blur-xl bg-white/[0.06] border-[0.25px] border-[rgba(252,204,24,0.2)]",
                   isCenter ? "z-20 shadow-gluon-shade/10 border-[0.25px] border-[rgba(252,204,24,0.35)]" : "z-10 border-[0.25px] border-[rgba(252,204,24,0.2)]"
                 )}
                 initial={false}
