@@ -4,19 +4,20 @@ import { useRef } from 'react'
 import Image from 'next/image'
 import Navbar from './components/Navbar'
 import ScrollExpandMedia from './components/ScrollExpandMedia'
+import MobileHowItWorks from './components/MobileHowItWorks'
 import { FocusRail, type FocusRailItem } from './ui/focus-rail'
 import { motion } from 'framer-motion'
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ""
 
 const HERO_LINK_CLASS =
-  "px-8 py-3 text-lg font-semibold text-white bg-white/[0.02] border border-white/10 rounded-full hover:border-gluon/50 hover:bg-white/[0.05] hover:text-gluon hover:scale-105 hover:shadow-lg hover:shadow-gluon/20 transition-all duration-300"
+  "w-full sm:w-auto text-center px-6 sm:px-8 py-3 text-base sm:text-lg font-semibold text-white bg-white/[0.02] border border-white/10 rounded-full hover:border-gluon/50 hover:bg-white/[0.05] hover:text-gluon hover:scale-105 hover:shadow-lg hover:shadow-gluon/20 transition-all duration-300"
 
 const RESEARCH_LINK_CLASS =
-  "px-8 py-3 text-lg font-semibold text-black bg-white/[0.08] border border-black/20 rounded-full hover:border-black/30 hover:bg-white/20 hover:scale-105 hover:shadow-lg transition-all duration-300"
+  "w-full sm:w-auto text-center px-6 sm:px-8 py-3 text-base sm:text-lg font-semibold text-black bg-white/[0.08] border border-black/20 rounded-full hover:border-black/30 hover:bg-white/20 hover:scale-105 hover:shadow-lg transition-all duration-300"
 
 const FOOTER_SOCIAL_LINK_CLASS =
-  "w-10 h-10 rounded-lg bg-white/[0.04] backdrop-blur-md border border-[rgba(252,204,24,0.15)] flex items-center justify-center text-white/80 hover:text-white hover:border-gluon-shade/40 hover:bg-white/[0.08] transition-all"
+  "w-11 h-11 min-w-[44px] min-h-[44px] rounded-lg bg-white/[0.04] backdrop-blur-md border border-[rgba(252,204,24,0.15)] flex items-center justify-center text-white/80 hover:text-white hover:border-gluon-shade/40 hover:bg-white/[0.08] active:scale-95 transition-all"
 
 const HOW_IT_WORKS_RAIL_ITEMS: FocusRailItem[] = [
   {
@@ -62,22 +63,22 @@ export default function Home() {
         <Navbar />
         <main className="relative z-10">
         {/* Hero Section */}
-      <section className="relative overflow-hidden px-6 pt-32 pb-48 sm:px-8 lg:px-16 min-h-screen flex items-center bg-background">
+      <section className="relative overflow-hidden px-4 pt-28 pb-16 sm:px-8 sm:pt-32 sm:pb-36 lg:px-16 lg:pb-48 min-h-[100dvh] flex items-center bg-background">
         <div className="relative mx-auto max-w-4xl text-center w-full z-10">
-          <h1 className="text-5xl font-bold sm:text-6xl lg:text-7xl mt-[7.25rem] tracking-tight text-gluon">
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl mt-6 sm:mt-12 lg:mt-[7.25rem] tracking-tight text-gluon leading-tight">
             Gluon Stablecoin Protocol
           </h1>
           
           {/* Choose Your Ecosystem */}
-          <div className="mt-18">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
+          <div className="mt-10 sm:mt-14 lg:mt-18">
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4">
               Choose Your Ecosystem
             </h2>
-            <p className="text-base sm:text-lg text-white/70 mb-12">
+            <p className="text-sm sm:text-lg text-white/70 mb-8 sm:mb-12 max-w-lg mx-auto">
               Gluon is available on multiple blockchain networks
             </p>
             
-            <div className="flex flex-wrap justify-center gap-6">
+            <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-6 max-w-xs sm:max-w-none mx-auto">
               <a 
                 href="https://evm.gluon.stability.nexus/"
                 target="_blank"
@@ -112,15 +113,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How It Works Section - Sticky Scroll Container */}
+      {/* Desktop / Laptop: How It Works Section - Sticky Scroll Container */}
       <div 
         ref={howItWorksSectionRef}
-        className="relative"
+        className="hidden lg:block relative"
         style={{ height: `${140 * HOW_IT_WORKS_RAIL_ITEMS.length}vh` }}
       >
         <section 
           id="how-it-works" 
-          className="sticky top-0 px-6 py-24 sm:px-8 lg:px-16 border-t border-white/5 min-h-screen flex items-center bg-background"
+          className="sticky top-0 px-4 sm:px-8 lg:px-16 py-12 sm:py-20 lg:py-24 border-t border-white/5 min-h-[100dvh] flex items-center bg-background"
         >
           {/* Subtle background accent */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/[0.03] rounded-full blur-[100px] pointer-events-none"></div>
@@ -142,23 +143,23 @@ export default function Home() {
             </motion.div>
 
             {/* Side-by-side Layout: Text Left, FocusRail Right */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center">
               {/* Left Side - Text Content */}
               <motion.div 
-                className="space-y-6"
+                className="space-y-4 sm:space-y-6"
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                <h2 className="text-4xl sm:text-5xl font-bold text-white">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
                   Dual Token Mechanics
                 </h2>
-                <div className="space-y-4 text-white/90 leading-relaxed">
-                  <p className="text-base">
+                <div className="space-y-3 sm:space-y-4 text-white/90 leading-relaxed">
+                  <p className="text-sm sm:text-base">
                     The essence of Gluon W is that, analogously to how an atom&apos;s nucleus is composed of protons and neutrons (known collectively as nucleons), a <span className="text-violet-400 font-medium">base</span> token is composed of two sub-assets: <span className="font-medium text-[#f59e0b]">neutrons</span> or stable tokens, whose price is kept stable relative to a target price; and <span className="font-medium text-[#E42423]">protons</span> or volatile tokens, whose price is more volatile than the <span className="text-violet-400 font-medium">base</span> token.
                   </p>
-                  <p className="text-base text-white/70">
+                  <p className="text-sm sm:text-base text-white/70">
                     The protocol defines the rules of an autonomous reactor capable of four reactions:
                   </p>
                 </div>
@@ -185,29 +186,78 @@ export default function Home() {
         </section>
       </div>
 
+      {/* Mobile / Tablet: How It Works Section (< lg) */}
+      <section 
+        id="how-it-works-mobile" 
+        className="block lg:hidden px-4 sm:px-8 py-14 sm:py-20 border-t border-white/5 bg-background relative overflow-hidden"
+      >
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] bg-white/[0.02] rounded-full blur-[80px] pointer-events-none"></div>
+
+        <div className="relative mx-auto max-w-xl w-full">
+          {/* Header Badge */}
+          <motion.div 
+            className="text-center mb-6 sm:mb-8"
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="inline-block">
+              <span className="px-4 py-1.5 text-xs sm:text-sm font-semibold text-white/90 rounded-full glass-card-strong">
+                How It Works
+              </span>
+            </div>
+          </motion.div>
+
+          {/* Title & Description */}
+          <motion.div 
+            className="space-y-4 text-center mb-8"
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <h2 className="text-3xl sm:text-4xl font-bold text-white">
+              Dual Token Mechanics
+            </h2>
+            <div className="space-y-3 text-white/90 text-sm sm:text-base leading-relaxed text-left sm:text-center">
+              <p>
+                The essence of Gluon W is that, analogously to how an atom&apos;s nucleus is composed of protons and neutrons (known collectively as nucleons), a <span className="text-violet-400 font-medium">base</span> token is composed of two sub-assets: <span className="font-medium text-[#f59e0b]">neutrons</span> or stable tokens, whose price is kept stable relative to a target price; and <span className="font-medium text-[#E42423]">protons</span> or volatile tokens, whose price is more volatile than the <span className="text-violet-400 font-medium">base</span> token.
+              </p>
+              <p className="text-white/70">
+                The protocol defines the rules of an autonomous reactor capable of four reactions:
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Interactive Mobile Reaction Component */}
+          <MobileHowItWorks items={HOW_IT_WORKS_RAIL_ITEMS} />
+        </div>
+      </section>
+
       {/* Whitepaper Section */}
       <ScrollExpandMedia
         mediaType="image"
         mediaSrc={`${basePath}/whitepaper1.png`}
         alt="Gluon Research Whitepaper - Dual-Token Stabilization Mechanics (IACR ePrint 2025/1372)"
       >
-        <div className="space-y-8">
+        <div className="space-y-6 sm:space-y-8">
           <div className="text-center space-y-2">
             <div className="inline-block">
-              <span className="text-sm tracking-[0.3em] text-black/60 font-semibold uppercase">IACR ePrint 2025/1372</span>
+              <span className="text-xs sm:text-sm tracking-[0.3em] text-black/60 font-semibold uppercase">IACR ePrint 2025/1372</span>
             </div>
-            <h3 className="text-2xl md:text-3xl font-bold text-black/90 tracking-wide">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-black/90 tracking-wide">
               Research Whitepaper
             </h3>
           </div>
           
-          <div className="max-w-md mx-auto">
-            <p className="text-base text-black/70 leading-relaxed text-center font-medium">
+          <div className="max-w-md mx-auto px-2 sm:px-0">
+            <p className="text-sm sm:text-base text-black/70 leading-relaxed text-center font-medium">
               A peer-reviewed cryptocurrency stabilization protocol leveraging dual-token mechanics and state-dependent settlement rules.
             </p>
           </div>
 
-          <div className="pt-8 flex flex-col items-center gap-3">
+          <div className="pt-4 sm:pt-8 flex flex-col items-center gap-3">
             <a
               href="https://eprint.iacr.org/2025/1372"
               target="_blank"
@@ -221,99 +271,101 @@ export default function Home() {
         </div>
       </ScrollExpandMedia>
 
-      {/* Why Gluon Section - COMMENTED OUT for now; see GitHub issue for tracking. */}
-      {/*
+      {/* Why Gluon Section */}
       <section className="px-6 py-20 sm:px-8 lg:px-16 border-t border-white/5">
         <div className="mx-auto max-w-6xl">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-12">
             Why Gluon
           </h2>
           
-          <div className="grid md:grid-cols-2 gap-12">
-            (For Protocol Integrators column)
-            <div>
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-1.5 h-8 bg-gradient-to-b from-white/40 to-white/20 rounded-full"></div>
-                <h3 className="text-2xl font-bold text-white">For Protocol Integrators</h3>
-              </div>
-            
-              <div className="space-y-6">
-                <div className="p-6 rounded-xl glass-card hover:border-[rgba(252,204,24,0.25)] transition-colors">
-                  <h4 className="text-lg font-semibold text-white mb-2">Create Custom Stablecoins</h4>
-                  <p className="text-gray-400 text-sm">
-                    Launch your own branded stablecoin backed by various crypto assets with customizable parameters.
-                  </p>
-                </div>
-                
-                <div className="p-6 rounded-xl glass-card hover:border-[rgba(252,204,24,0.25)] transition-colors">
-                  <h4 className="text-lg font-semibold text-white mb-2">Multi-Chain Deployment</h4>
-                  <p className="text-gray-400 text-sm">
-                    Deploy on EVM chains, Ergo, or Solana to reach users across different blockchain ecosystems.
-                  </p>
-                </div>
-                
-                <div className="p-6 rounded-xl glass-card hover:border-[rgba(252,204,24,0.25)] transition-colors">
-                  <h4 className="text-lg font-semibold text-white mb-2">Earn Protocol Fees</h4>
-                  <p className="text-gray-400 text-sm">
-                    Receive a portion of fees generated from minting, redemption, and liquidation activities.
-                  </p>
-                </div>
-                
-                <div className="p-6 rounded-xl glass-card hover:border-[rgba(252,204,24,0.25)] transition-colors">
-                  <h4 className="text-lg font-semibold text-white mb-2">Enhance Your DeFi Ecosystem</h4>
-                  <p className="text-gray-400 text-sm">
-                    Add stablecoin infrastructure to your protocol without building from scratch, enabling new use cases.
-                  </p>
-                </div>
-              </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Box 1: Benefits of Holding Stable Coins */}
+            <div className="p-6 rounded-xl glass-card hover:border-[rgba(252,204,24,0.25)] transition-colors">
+              <h3 className="text-lg font-semibold text-white mb-2">Benefits of Holding Stable Coins</h3>
+              <p className="text-gray-400 text-sm">
+                Maintain predictable price stability tied to a target peg while benefiting from reserve-strengthening protocol fees.
+              </p>
             </div>
-          
-            (For Users column)
-            <div>
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-1.5 h-8 bg-gradient-to-b from-white/40 to-white/20 rounded-full"></div>
-                <h3 className="text-2xl font-bold text-white">For Users</h3>
-              </div>
-              
-              <div className="space-y-6">
-                <div className="p-6 rounded-xl glass-card hover:border-[rgba(252,204,24,0.25)] transition-colors">
-                  <h4 className="text-lg font-semibold text-white mb-2">Unlock Liquidity Without Selling</h4>
-                  <p className="text-gray-400 text-sm">
-                    Mint stablecoins against your crypto holdings to access liquidity while maintaining exposure to your assets.
-                  </p>
-                </div>
-                
-                <div className="p-6 rounded-xl glass-card hover:border-[rgba(252,204,24,0.25)] transition-colors">
-                  <h4 className="text-lg font-semibold text-white mb-2">Decentralized and Trustless</h4>
-                  <p className="text-gray-400 text-sm">
-                    All operations are executed by smart contracts with no central authority controlling your funds.
-                  </p>
-                </div>
-                
-                <div className="p-6 rounded-xl glass-card hover:border-[rgba(252,204,24,0.25)] transition-colors">
-                  <h4 className="text-lg font-semibold text-white mb-2">Transparent Collateralization</h4>
-                  <p className="text-gray-400 text-sm">
-                    View real-time collateral ratios and protocol health. Every stablecoin is verifiably backed on-chain.
-                  </p>
-                </div>
-                
-                <div className="p-6 rounded-xl glass-card hover:border-[rgba(252,204,24,0.25)] transition-colors">
-                  <h4 className="text-lg font-semibold text-white mb-2">Flexible Participation</h4>
-                  <p className="text-gray-400 text-sm">
-                    Mint and redeem at any time, choosing from a variety of supported collateral types and stablecoin denominations.
-                  </p>
-                </div>
-              </div>
+            
+            {/* Box 2: Benefits of Holding Volatile Coins */}
+            <div className="p-6 rounded-xl glass-card hover:border-[rgba(252,204,24,0.25)] transition-colors">
+              <h3 className="text-lg font-semibold text-white mb-2">Benefits of Holding Volatile Coins</h3>
+              <p className="text-gray-400 text-sm">
+                Gain leveraged exposure to the underlying reserve asset while capturing protocol growth and transaction fees.
+              </p>
+            </div>
+
+            {/* Box 3: Fission & Fusion Mechanisms */}
+            <div className="p-6 rounded-xl glass-card hover:border-[rgba(252,204,24,0.25)] transition-colors">
+              <h3 className="text-lg font-semibold text-white mb-2">Fission & Fusion Mechanisms</h3>
+              <p className="text-gray-400 text-sm">
+                Split reserve assets into stable coins and volatile coins (Fission) or combine them back into reserve assets (Fusion).
+              </p>
+            </div>
+            
+            {/* Box 4: Zero-Governance & Autonomy */}
+            <div className="p-6 rounded-xl glass-card hover:border-[rgba(252,204,24,0.25)] transition-colors">
+              <h3 className="text-lg font-semibold text-white mb-2">Zero-Governance & Autonomy</h3>
+              <p className="text-gray-400 text-sm">
+                Operate completely autonomously on-chain without central administration, admin keys, multi-sigs, or DAO parameter voting.
+              </p>
+            </div>
+            
+            {/* Box 5: Rent-Seeking Free Infrastructure */}
+            <div className="p-6 rounded-xl glass-card hover:border-[rgba(252,204,24,0.25)] transition-colors">
+              <h3 className="text-lg font-semibold text-white mb-2">Rent-Seeking Free Infrastructure</h3>
+              <p className="text-gray-400 text-sm">
+                Function as permissionless public infrastructure where all transaction fees remain in the reserve to strengthen stability.
+              </p>
+            </div>
+
+            {/* Box 6: Resilience to Oracle Imperfections */}
+            <div className="p-6 rounded-xl glass-card hover:border-[rgba(252,204,24,0.25)] transition-colors">
+              <h3 className="text-lg font-semibold text-white mb-2">Resilience to Oracle Imperfections</h3>
+              <p className="text-gray-400 text-sm">
+                Safeguard protocol reserves using dynamic trailing volume metrics against oracle latency or market price spikes.
+              </p>
+            </div>
+
+            {/* Box 7: Liquidity Pool Duality */}
+            <div className="p-6 rounded-xl glass-card hover:border-[rgba(252,204,24,0.25)] transition-colors">
+              <h3 className="text-lg font-semibold text-white mb-2">Liquidity Pool Duality</h3>
+              <p className="text-gray-400 text-sm">
+                Act as the mathematical dual of a liquidity pool by maintaining a single reserve asset to issue stable coins and volatile coins.
+              </p>
+            </div>
+
+            {/* Box 8: No Liquidations or CDP Debt */}
+            <div className="p-6 rounded-xl glass-card hover:border-[rgba(252,204,24,0.25)] transition-colors">
+              <h3 className="text-lg font-semibold text-white mb-2">No Liquidations or CDP Debt</h3>
+              <p className="text-gray-400 text-sm">
+                Mint and trade stable coins without liquidation risks, forced debt closures, or paying borrowing interest rates.
+              </p>
+            </div>
+            
+            {/* Box 9: Freedom from Hard Reserve Cutoffs */}
+            <div className="p-6 rounded-xl glass-card hover:border-[rgba(252,204,24,0.25)] transition-colors">
+              <h3 className="text-lg font-semibold text-white mb-2">Freedom from Hard Reserve Cutoffs</h3>
+              <p className="text-gray-400 text-sm">
+                Execute all core operations continuously without rigid minimum or maximum reserve ratio thresholds.
+              </p>
+            </div>
+
+            {/* Box 10: Transparent & Equitable Pricing */}
+            <div className="p-6 rounded-xl glass-card hover:border-[rgba(252,204,24,0.25)] transition-colors">
+              <h3 className="text-lg font-semibold text-white mb-2">Transparent & Equitable Pricing</h3>
+              <p className="text-gray-400 text-sm">
+                Derive fair pricing and fee distributions directly from mathematical reaction equations.
+              </p>
             </div>
           </div>
         </div>
       </section>
-      */}
 
       {/* Footer */}
-      <footer className="px-6 py-16 sm:px-8 lg:px-16 border-t border-white/5">
+      <footer className="px-4 py-12 sm:px-8 sm:py-16 lg:px-16 border-t border-white/5">
         <div className="mx-auto max-w-6xl">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6 sm:gap-8">
             <Image 
               src={`${basePath}/logo-animated.gif`}
               alt="Stability Nexus" 
