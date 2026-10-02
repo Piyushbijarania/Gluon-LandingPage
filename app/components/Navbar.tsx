@@ -43,35 +43,29 @@ export default function Navbar() {
   // When NOT scrolled: closer together (smaller padding)
   const getPadding = () => {
     if (isScrolled) {
-      // Scrolled - use large padding for extreme spacing
-      if (windowWidth >= 1536) { // 2xl screens
-        return '160px'
-      }
-      if (windowWidth >= 1280) { // xl screens
-        return '128px'
-      }
-      if (windowWidth >= 1024) { // lg screens
-        return '96px'
-      }
-      if (windowWidth >= 768) { // md screens
-        return '64px'
-      }
-      return '48px'
+      if (windowWidth >= 1536) return '160px'
+      if (windowWidth >= 1280) return '128px'
+      if (windowWidth >= 1024) return '80px'
+      if (windowWidth >= 768) return '36px'
+      if (windowWidth >= 640) return '24px'
+      return '16px' // mobile
     } else {
-      // Not scrolled - use smaller padding (closer together)
-      return '24px'
+      if (windowWidth >= 1024) return '24px'
+      if (windowWidth >= 768) return '20px'
+      if (windowWidth >= 640) return '16px'
+      return '16px' // mobile
     }
   }
 
   return (
     <>
       {/* Background glow effect */}
-      <div className="fixed top-0 left-0 right-0 h-32 z-40 pointer-events-none">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-32 bg-white/[0.02] blur-3xl"></div>
+      <div className="fixed top-0 left-0 right-0 h-32 z-40 pointer-events-none overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] max-w-full h-32 bg-white/[0.02] blur-3xl"></div>
       </div>
 
       <motion.header
-        className="fixed z-50 w-full pointer-events-auto"
+        className="fixed top-0 left-0 right-0 z-50 w-full pointer-events-auto"
         initial={{ y: 0, opacity: 1 }}
         animate={{ y: 0, opacity: 1 }}
       >
@@ -83,8 +77,8 @@ export default function Navbar() {
           maxWidth: '100%',
           borderRadius: '0px',
           border: '1px solid rgba(252, 204, 24, 0.08)',
-          paddingLeft: windowWidth > 0 ? getPadding() : '128px',
-          paddingRight: windowWidth > 0 ? getPadding() : '128px',
+          paddingLeft: windowWidth > 0 ? getPadding() : '16px',
+          paddingRight: windowWidth > 0 ? getPadding() : '16px',
         }}
         animate={hasAnimated ? {
           backgroundColor: isScrolled ? 'rgba(15, 15, 30, 0.55)' : 'rgba(15, 15, 30, 0.25)',
@@ -142,7 +136,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setMenuOpen((o) => !o)}
-            className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg text-white/90 hover:bg-white/10 transition-colors"
+            className="md:hidden flex items-center justify-center w-11 h-11 rounded-lg text-white/90 hover:bg-white/10 active:scale-95 transition-all"
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
           >
@@ -168,14 +162,14 @@ export default function Navbar() {
               transition={{ duration: 0.2 }}
               className="md:hidden overflow-hidden border-t border-white/10"
             >
-              <div className="flex flex-col gap-2 py-3">
-                <a href="https://evm.gluon.stability.nexus/" target="_blank" rel="noopener noreferrer" className={NAV_LINK_CLASS} onClick={() => setMenuOpen(false)}>
+              <div className="flex flex-col gap-2.5 py-4">
+                <a href="https://evm.gluon.stability.nexus/" target="_blank" rel="noopener noreferrer" className={`${NAV_LINK_CLASS} py-3 text-base`} onClick={() => setMenuOpen(false)}>
                   EVM
                 </a>
-                <a href="https://gluon.gold/" target="_blank" rel="noopener noreferrer" className={NAV_LINK_CLASS} onClick={() => setMenuOpen(false)}>
+                <a href="https://gluon.gold/" target="_blank" rel="noopener noreferrer" className={`${NAV_LINK_CLASS} py-3 text-base`} onClick={() => setMenuOpen(false)}>
                   Ergo
                 </a>
-                <a href="https://solana.gluon.stability.nexus/" target="_blank" rel="noopener noreferrer" className={NAV_LINK_CLASS} onClick={() => setMenuOpen(false)}>
+                <a href="https://solana.gluon.stability.nexus/" target="_blank" rel="noopener noreferrer" className={`${NAV_LINK_CLASS} py-3 text-base`} onClick={() => setMenuOpen(false)}>
                   Solana
                 </a>
               </div>

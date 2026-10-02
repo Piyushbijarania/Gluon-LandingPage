@@ -10,6 +10,7 @@ interface ScrollExpandMediaProps {
   mediaSrc: string;
   posterSrc?: string;
   title?: string;
+  alt?: string;
   date?: string;
   scrollToExpand?: string;
   textBlend?: boolean;
@@ -21,13 +22,15 @@ const ScrollExpandMedia = ({
   mediaSrc,
   posterSrc,
   title,
+  alt,
   date,
   scrollToExpand,
   textBlend,
   children,
 }: ScrollExpandMediaProps) => {
   const sectionRef = useRef<HTMLDivElement | null>(null);
-  const [isMobileState, setIsMobileState] = useState<boolean>(false);
+  const [deviceType, setDeviceType] = useState<'mobile' | 'tablet' | 'desktop'>('desktop');
+  const [windowWidth, setWindowWidth] = useState<number>(1024);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -35,26 +38,62 @@ const ScrollExpandMedia = ({
   });
 
   useEffect(() => {
-    const checkIfMobile = (): void => {
-      setIsMobileState(window.innerWidth < 768);
+    const handleResize = (): void => {
+      const w = window.innerWidth;
+      setWindowWidth(w);
+      if (w < 768) {
+        setDeviceType('mobile');
+      } else if (w < 1024) {
+        setDeviceType('tablet');
+      } else {
+        setDeviceType('desktop');
+      }
     };
 
-    checkIfMobile();
-    window.addEventListener('resize', checkIfMobile);
+    handleResize();
+    window.addEventListener('resize', handleResize);
 
-    return () => window.removeEventListener('resize', checkIfMobile);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  const targetWidth =
+    deviceType === 'mobile'
+      ? Math.min(364, Math.max(280, windowWidth - 32))
+      : deviceType === 'tablet'
+        ? 754
+        : 1000;
+
+  const targetHeight =
+    deviceType === 'mobile'
+      ? 352
+      : deviceType === 'tablet'
+        ? 542
+        : 650;
+
+  const initialWidth =
+    deviceType === 'mobile'
+      ? 200
+      : deviceType === 'tablet'
+        ? 220
+        : 250;
+
+  const initialHeight =
+    deviceType === 'mobile'
+      ? 240
+      : deviceType === 'tablet'
+        ? 280
+        : 320;
 
   const mediaWidth = useTransform(
     scrollYProgress,
     [0, 0.2, 0.6, 1],
-    [isMobileState ? 200 : 250, isMobileState ? 200 : 250, isMobileState ? 700 : 1000, isMobileState ? 700 : 1000]
+    [initialWidth, initialWidth, targetWidth, targetWidth]
   );
   
   const mediaHeight = useTransform(
     scrollYProgress,
     [0, 0.2, 0.6, 1],
-    [isMobileState ? 280 : 320, isMobileState ? 280 : 320, isMobileState ? 500 : 650, isMobileState ? 500 : 650]
+    [initialHeight, initialHeight, targetHeight, targetHeight]
   );
 
   const contentOpacity = useTransform(scrollYProgress, [0, 0.5, 0.7, 1], [1, 1, 1, 1]);
@@ -79,7 +118,7 @@ const ScrollExpandMedia = ({
             {mediaType === 'image' ? (
               <Image
                 src={mediaSrc}
-                alt={title || 'Media content'}
+                alt={alt || title || 'Gluon Research Whitepaper'}
                 fill
                 className='object-cover'
                 priority
@@ -157,7 +196,7 @@ const ScrollExpandMedia = ({
             style={{ opacity: contentOpacity }}
           >
             <motion.div 
-              className='max-w-4xl w-full rounded-3xl p-8 md:p-12 backdrop-blur-2xl bg-[rgba(15,15,30,0.4)] border border-[rgba(252,204,24,0.3)]'
+              className='max-w-4xl w-full rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12 backdrop-blur-2xl bg-[rgba(15,15,30,0.4)] border border-[rgba(252,204,24,0.3)]'
               initial={{ scale: 0.9 }}
               whileInView={{ scale: 1 }}
               transition={{ duration: 0.3 }}
