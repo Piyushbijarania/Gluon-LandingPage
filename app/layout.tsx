@@ -19,13 +19,13 @@ export const metadata: Metadata = {
   },
   title: "Gluon Stablecoin Protocol",
   description:
-    "Gluon W is a dual-token stabilization protocol. Split base tokens into neutrons and protons. Available on EVM, Ergo, and Solana.",
-  keywords: ["Gluon", "DeFi", "stablecoin", "dual token", "crypto", "EVM", "Ergo", "Solana"],
+    "Gluon is a dual-token stabilization protocol. Split base tokens into neutrons and protons. Available on EVM and Ergo.",
+  keywords: ["Gluon", "DeFi", "stablecoin", "dual token", "crypto", "EVM", "Ergo"],
   authors: [{ name: "Gluon Stablecoin Protocol" }],
   openGraph: {
     title: "Gluon Stablecoin Protocol",
     description:
-      "Gluon W is a dual-token stabilization protocol. Split base tokens into neutrons and protons. Available on EVM, Ergo, and Solana.",
+      "Gluon is a dual-token stabilization protocol. Split base tokens into neutrons and protons. Available on EVM and Ergo.",
     url: "https://gluon.stability.nexus",
     siteName: "Gluon Protocol",
     images: [
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Gluon Stablecoin Protocol",
     description:
-      "Gluon W is a dual-token stabilization protocol. Split base tokens into neutrons and protons. Available on EVM, Ergo, and Solana.",
+      "Gluon is a dual-token stabilization protocol. Split base tokens into neutrons and protons. Available on EVM and Ergo.",
     site: "@StabilityNexus",
     creator: "@StabilityNexus",
     images: ["/image.png"],

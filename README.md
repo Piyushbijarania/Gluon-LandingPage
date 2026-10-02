@@ -50,8 +50,8 @@
 <!-- Project core values and objective -->
 <p align="center">
   <strong>
-  Gluon W is a dual-token stabilization protocol. <br />
-  Split base tokens into neutrons and protons, or merge them back. Available on EVM, Ergo, and Solana.
+  Gluon is a dual-token stabilization protocol. <br />
+  Split base tokens into neutrons and protons, or merge them back. Available on EVM and Ergo.
   </strong>
 </p>
 
@@ -72,9 +72,6 @@
       </ul>
     </li>
     <li><a href="#learn-more"> ➤ Learn More</a></li>
-    <li><a href="#deploy-on-vercel"> ➤ Deploy on Vercel</a></li>
-    <!-- Don't delete it -->
-    <li><a href="#fund"> ➤ Fund Stability Nexus</a></li>
   </ul>
 </details>
 
@@ -150,20 +147,3 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 <!-- Use Back Button after each section -->
 <div align="right"><kbd><a href="#readme-top">↑ Back to top ↑</a></kbd></div>
-
-## **Deploy on Vercel**
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-<!-- Use Back Button after each section -->
-<div align="right"><kbd><a href="#readme-top">↑ Back to top ↑</a></kbd></div>
-
----
-
-<!-- Don't delete it -->
-<!-- Funding Badge -->
-<div align="center" name="fund">
-<a href="https://docs.stability.nexus/about-us/fund-us"><img src="public/readme-assets/fund-badge.svg" alt="Fund Stability Nexus Badge"/></a>
-</div>
