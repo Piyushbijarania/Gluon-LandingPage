@@ -187,6 +187,15 @@ export default function InteractiveHowItWorks() {
   const timerRef = useRef<NodeJS.Timeout | null>(null)
   const INTERVAL_MS = 3500
 
+  const resetTimer = () => {
+    if (timerRef.current) clearInterval(timerRef.current)
+    if (!isPaused) {
+      timerRef.current = setInterval(() => {
+        setActiveIdx((prev) => (prev + 1) % PROTOCOL_STEPS.length)
+      }, INTERVAL_MS)
+    }
+  }
+
   useEffect(() => {
     if (isPaused) return
 
@@ -197,7 +206,12 @@ export default function InteractiveHowItWorks() {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current)
     }
-  }, [activeIdx, isPaused])
+  }, [isPaused])
+
+  const handleSelectStep = (idx: number) => {
+    setActiveIdx(idx)
+    resetTimer()
+  }
 
   const activeItem = PROTOCOL_STEPS[activeIdx]
 
@@ -240,7 +254,7 @@ export default function InteractiveHowItWorks() {
                 <button
                   key={step.id}
                   type="button"
-                  onClick={() => setActiveIdx(idx)}
+                  onClick={() => handleSelectStep(idx)}
                   className={`w-full text-left p-6 sm:p-7 transition-all duration-300 relative cursor-pointer flex flex-col group ${
                     isActive ? 'bg-white/[0.04]' : 'bg-transparent hover:bg-white/[0.02]'
                   }`}
